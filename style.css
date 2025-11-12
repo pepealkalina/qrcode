@@ -1,87 +1,192 @@
 /* style.css */
 
+/* Paleta de colores Material 3 con tu toque "cozy" */
 :root {
-    --bg: #FEF3E2;
-    --text: #4A4A4A;
-    --accent1: #FAB12F;
-    --accent2: #FA812F;
-    --action: #DD0303;
+    --mdc-theme-primary: #FAB12F;       /* Tu FAB12F para primario */
+    --mdc-theme-on-primary: #FFFFFF;    /* Texto blanco sobre primario */
+    --mdc-theme-secondary: #FA812F;     /* Tu FA812F para secundario */
+    --mdc-theme-on-secondary: #FFFFFF;  /* Texto blanco sobre secundario */
+    --mdc-theme-error: #DD0303;         /* Tu DD0303 para error/acción */
+    --mdc-theme-on-error: #FFFFFF;      /* Texto blanco sobre error */
+    --mdc-theme-background: #FEF3E2;    /* Tu FEF3E2 para fondo */
+    --mdc-theme-on-background: #4A4A4A; /* Tu 4A4A4A para texto */
+    --mdc-theme-surface: #FFFFFF;       /* Superficie (tarjetas) */
+    --mdc-theme-on-surface: #4A4A4A;    /* Texto sobre superficie */
+    --mdc-theme-outline: #CCCCCC;       /* Líneas de borde */
+    --mdc-elevation-dp0: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); /* Sombra ligera */
+    --mdc-elevation-dp2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); /* Sombra más fuerte */
 }
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
+    font-family: 'Roboto', sans-serif; /* Fuente Material Design */
+    background-color: var(--mdc-theme-background);
+    color: var(--mdc-theme-on-background);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    line-height: 1.5;
 }
-.container {
-    background-color: white;
-    padding: 2.5rem;
+
+/* Layout Grid simple (simula un poco el sistema de cuadrícula de MDC) */
+.mdc-layout-grid {
+    width: 100%;
+    max-width: 960px; /* Ancho máximo del grid */
+    margin: 0 auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.mdc-layout-grid__inner {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px; /* Compensar padding de celdas */
+}
+.mdc-layout-grid__cell {
+    padding: 8px; /* Espaciado entre celdas */
+    box-sizing: border-box;
+}
+.mdc-layout-grid__cell--span-12 {
+    width: 100%;
+}
+
+/* Card (similar a las elevaciones de Material 3) */
+.card {
+    background-color: var(--mdc-theme-surface);
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: var(--mdc-elevation-dp2);
+    padding: 2.5rem;
     text-align: center;
     width: 90%;
     max-width: 400px;
-}
-h1 {
-    color: var(--accent2);
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-input[type="text"] {
-    padding: 0.75rem 1rem;
-    border: 2px solid #EEE;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-input[type="text"]:focus {
-    outline: none;
-    border-color: var(--accent1);
-    box-shadow: 0 0 0 3px rgba(250, 177, 47, 0.3);
-}
-button {
-    padding: 0.85rem 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    background-color: var(--action);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-button:hover {
-    background-color: #C00;
-}
-.qr-container {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: var(--bg);
-    border-radius: 8px;
-    display: inline-block;
-    /* Oculto hasta que se genera el primer QR */
-    transition: all 0.3s;
-    opacity: 0;
-    transform: scale(0.9);
+    margin: 0 auto;
 }
 
-/* ¡CAMBIO CLAVE! 
-  Ahora apuntamos a los elementos 'canvas' e 'img'
-  que la librería de JS crea, en lugar de a un 'svg'.
-*/
-.qr-container canvas,
-.qr-container img {
+.card-title {
+    color: var(--mdc-theme-secondary);
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espaciado entre elementos del formulario */
+}
+
+/* Text Field (Input) - Estilo Material 3 minimalista */
+.mdc-text-field {
+    position: relative;
+    padding-top: 8px; /* Espacio para el label flotante (si se añadiera) */
+}
+.mdc-text-field__input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--mdc-theme-outline);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--mdc-theme-on-surface);
+    background-color: var(--mdc-theme-surface);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+.mdc-text-field__input:focus {
+    outline: none;
+    border-color: var(--mdc-theme-primary);
+    box-shadow: 0 0 0 1px var(--mdc-theme-primary); /* Foco más sutil */
+}
+.mdc-text-field__input::placeholder {
+    color: var(--mdc-theme-on-surface);
+    opacity: 0.7;
+}
+
+/* Buttons - Estilo Material 3 (Raised y Outlined) */
+.mdc-button {
+    min-width: 64px;
+    height: 40px;
+    padding: 0 24px;
+    border-radius: 20px; /* Bordes más redondeados */
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.0892857143em;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Raised Button (con color de acción) */
+.mdc-button--raised {
+    background-color: var(--mdc-theme-error); /* Usamos --action para el botón principal */
+    color: var(--mdc-theme-on-error);
+    box-shadow: var(--mdc-elevation-dp0);
+}
+.mdc-button--raised:hover {
+    background-color: color-mix(in srgb, var(--mdc-theme-error) 90%, black); /* Un poco más oscuro */
+    box-shadow: var(--mdc-elevation-dp2);
+}
+.mdc-button--raised:active {
+    background-color: color-mix(in srgb, var(--mdc-theme-error) 80%, black);
+}
+
+/* Outlined Button (para descargar) */
+.mdc-button--outlined {
+    background-color: transparent;
+    color: var(--mdc-theme-on-background);
+    border: 1px solid var(--mdc-theme-outline);
+}
+.mdc-button--outlined:hover {
+    background-color: rgba(var(--mdc-theme-on-background), 0.08); /* Fondo sutil al pasar */
+}
+.mdc-button--outlined:active {
+    background-color: rgba(var(--mdc-theme-on-background), 0.12);
+}
+
+.mdc-button__label {
+    /* Por si acaso */
+}
+
+/* Contenedor del QR y botón de descarga */
+.qr-output {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.qr-container {
+    padding: 1rem;
+    background-color: var(--mdc-theme-background); /* Fondo del QR con tu crema */
+    border-radius: 8px;
+    display: inline-block; /* Ajustar al contenido */
+    box-shadow: var(--mdc-elevation-dp0);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    opacity: 0; /* Oculto por defecto */
+    transform: scale(0.95);
+    min-width: 250px; /* Para que no se mueva el layout al aparecer */
+    min-height: 250px;
+    display: flex; /* Para centrar el canvas si es más pequeño */
+    justify-content: center;
+    align-items: center;
+}
+
+/* El elemento del QR generado (normalmente un canvas) */
+.qr-container canvas {
     display: block;
     width: 100%;
     max-width: 250px;
     height: auto;
+}
+
+/* Estado de mostrado */
+.qr-container.show {
+    opacity: 1;
+    transform: scale(1);
 }

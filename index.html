@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador QR (JS)</title>
+    <title>Generador QR (Material 3)</title>
     
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Generador QR</h1>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <div class="card">
+                    <h1 class="card-title">Generador QR</h1>
 
-        <form id="qr-form">
-            <input 
-              type="text" 
-              id="url-input" 
-              placeholder="Escribe tu URL aquí..." 
-              required
-            >
-            <button type="submit">Generar Código</button>
-        </form>
-        
-        <div class="qr-container" id="qr-container"></div>
+                    <form id="qr-form" class="form-container">
+                        <div class="mdc-text-field">
+                            <input 
+                              type="text" 
+                              id="url-input" 
+                              class="mdc-text-field__input" 
+                              placeholder="Escribe tu URL aquí..." 
+                              required
+                            >
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        
+                        <button type="submit" class="mdc-button mdc-button--raised">
+                            <span class="mdc-button__label">Generar Código</span>
+                        </button>
+                    </form>
+                    
+                    <div class="qr-output">
+                        <div class="qr-container" id="qr-container"></div>
+                        <button id="download-button" class="mdc-button mdc-button--outlined" style="display: none;">
+                            <span class="mdc-button__label">Descargar QR</span>
+                        </button>
+                    </div>
 
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
